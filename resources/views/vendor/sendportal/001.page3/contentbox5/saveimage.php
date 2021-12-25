@@ -1,0 +1,1 @@
+﻿<html><body onload="parent.document.getElementById('img-').setAttribute('src','uploads/-euex5c.jpg');  parent.document.getElementById('img-').removeAttribute('id') "></body></html>

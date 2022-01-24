@@ -65,16 +65,21 @@
 }
 
 #_cbhtml .is-sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 50px;
-  height: 100vh;
-  background: rgba(255, 255, 255, 0.97) !important;
-  color: rgba(0, 0, 0, 0.8);
-  border-right: rgba(0, 0, 0, 0.05) 1px solid;
-  z-index: 10003;
-  opacity: 0.0001;
+  top: 100px !important;
+    right: 0 !important;
+    height: auto !important;
+    background: rgb(253 198 142 / 97%) !important;
+    position: fixed;
+
+    /* top: 0; */
+    /* left: 0; */
+    width: 50px;
+    /* height: 100vh; */
+    /* background: rgba(255, 255, 255, 0.97) !important; */
+    color: rgba(0, 0, 0, 0.8);
+    border-right: rgba(0, 0, 0, 0.05) 1px solid;
+    z-index: 10003;
+    opacity: 0.0001;
 }
 #_cbhtml .is-sidebar button.is-sidebar-button {
   width: 100%;
@@ -87,6 +92,7 @@
   align-items: center;
   cursor: pointer;
 }
+
 #_cbhtml .is-sidebar button.is-sidebar-button svg {
   width: 16px;
   height: 16px;
@@ -97,6 +103,7 @@
   display: inline-block;
   width: 50px;
 }
+
 #_cbhtml .is-sidebar button.is-sidebar-button:hover, #_cbhtml .is-sidebar button.is-sidebar-button.active {
   background-color: rgba(133, 133, 133, 0.13);
 }

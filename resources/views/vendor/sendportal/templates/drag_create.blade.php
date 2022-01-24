@@ -37,7 +37,7 @@
                 <div class="form-group row">
                     <div class="offset-2 col-10">
                         <a href="#" class="btn btn-md btn-secondary btn-preview">{{ __('Show Preview') }}</a>
-                        <button class="btn btn-primary btn-md" type="submit">{{ __('Save Template') }}</button>
+                        <button class="btn btn-primary btn-md" type="button" data-url="{{ route('drag_create.post.drag_create') }}" id="btn-savedrag">{{ __('Save Template') }}</button>
                     </div>
                 </div>
             </div>

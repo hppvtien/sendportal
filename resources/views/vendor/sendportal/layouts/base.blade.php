@@ -38,7 +38,42 @@
         $('.sidebar').toggleClass('d-none');
     }
 </script>
-
+<script>
+    $.ajaxSetup({
+    headers: {
+        "X-CSRF-TOKEN": $('input[name="_token"]').val()
+    }
+});
+$("#btn-savedrag").on("click", function() {
+    var data_url = $(this).attr('data-url');
+    var mypage = localStorage.getItem("mypage");
+    var name = $("input[name=name]").val();
+    var SS_deltaBuffer = localStorage.getItem("SS_deltaBuffer");
+    var maincss = localStorage.getItem("maincss");
+    var sectioncss = localStorage.getItem("sectioncss");
+    $.ajax({
+        url: data_url,
+        type: "post",
+        dataType: "text",
+        data: {
+            name: name,
+            mypage: mypage,
+            SS_deltaBuffer: SS_deltaBuffer,
+            maincss: maincss,
+            sectioncss: sectioncss
+        },
+        success: function(result) {
+            console.log(result);
+            // $("#des-campaign").html(result);
+            // window.location.replace(result);
+        },
+        error: function(result) {
+            console.log("error");
+            // console.log(result);
+        }
+    });
+});
+</script>
 @stack('js')
 
 </body>

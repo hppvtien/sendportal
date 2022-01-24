@@ -1,5 +1,5 @@
 @push('css')
-<link href="{{ asset('/vendor/contentbox5/assets/minimalist-blocks/content.css') }}" rel="stylesheet" type="text/css" /> <!-- Snippets css include (contains a simple css for content blocks/snippets) -->
+<!-- <link href="{{ asset('/vendor/contentbox5/assets/minimalist-blocks/content.css') }}" rel="stylesheet" type="text/css" /> Snippets css include (contains a simple css for content blocks/snippets) -->
 <link href="{{ asset('/vendor/contentbox5/box/box-flex.css') }}" rel="stylesheet" type="text/css" /> <!-- Box Framework css include (contains a simple css for sections) -->
 
 <!-- Required css for editing (not needed in production) -->

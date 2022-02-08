@@ -55,6 +55,7 @@ Route::middleware('auth')->namespace('Auth')->group(
             ) {
                 $drag_createRouter->get('/', 'DragController@create')->name('get.drag_create');
                 $drag_createRouter->post('/', 'DragController@store')->name('post.drag_create');
+                $drag_createRouter->post('/{id}', 'DragController@update')->name('post.drag_update');
             }
         );
 

@@ -20,7 +20,7 @@
                     <a href="{{ route('sendportal.templates.create') }}" class="nav-link">Tạo templates thủ công</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('drag_create.get.drag_create') }}" class="nav-link bg-primary text-white" >Tạo templates kéo thả</a>
+                    <a href="{{ route('drag_create.get.drag_create') }}" class="nav-link bg-primary text-white">Tạo templates kéo thả</a>
                 </li>
             </ul>
             <div class="tab-content mt-5" id="">

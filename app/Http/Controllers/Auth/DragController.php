@@ -28,19 +28,21 @@ class DragController extends Controller
         $templateId = \DB::table('sendportal_templates')->insertGetId(
             $param
         );
+        if($templateId){
 
-        return redirect()->back()->with('success', __('Your profile was updated successfully!'));
+            return route('sendportal.templates.index');
+        }
+        
     }
-
-    public function edit(): View
+    public function update(Request $request, int $id)
     {
-        return view('profile.edit');
-    }
+        $param = [
+            'name'=>$request->name,
+            'content'=>$request->mypage,
+        ];
+        \DB::table('sendportal_templates')->where('id',$id)->update($param);
+      
 
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->update($request->validated());
-
-        return redirect()->back()->with('success', __('Your profile was updated successfully!'));
+        return route('sendportal.templates.index');
     }
 }

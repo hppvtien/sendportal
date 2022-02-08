@@ -65,7 +65,7 @@ $("#btn-savedrag").on("click", function() {
         success: function(result) {
             console.log(result);
             // $("#des-campaign").html(result);
-            // window.location.replace(result);
+            window.location.href = result;
         },
         error: function(result) {
             console.log("error");
@@ -74,6 +74,30 @@ $("#btn-savedrag").on("click", function() {
     });
 });
 </script>
+
+<script>
+        $( document ).ready(function() {
+            var content_page = $("#mypage_content").text();
+            if(content_page){
+            localStorage.setItem('mypage', $("#mypage_content").text());
+            localStorage.setItem('maincss', '');
+            localStorage.setItem('SS_deltaBuffer', '120,120,120');
+            localStorage.setItem("sectioncss", '<link data-name="contentstyle" data-class="type-opensans" href="/vendor/contentbox5/assets/styles/type-opensans.css" rel="stylesheet">');
+            localStorage.getItem("mypage");
+            localStorage.getItem("sectioncss");
+            localStorage.getItem("SS_deltaBuffer");
+            localStorage.getItem("maincss");
+            } else {
+                
+            localStorage.removeItem('mypage');
+            localStorage.removeItem('maincss');
+            localStorage.removeItem('SS_deltaBuffer');
+            localStorage.removeItem("sectioncss");
+            }
+            
+        });
+          
+    </script>
 @stack('js')
 
 </body>

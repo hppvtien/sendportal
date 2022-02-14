@@ -38,66 +38,7 @@
         $('.sidebar').toggleClass('d-none');
     }
 </script>
-<script>
-    $.ajaxSetup({
-    headers: {
-        "X-CSRF-TOKEN": $('input[name="_token"]').val()
-    }
-});
-$("#btn-savedrag").on("click", function() {
-    var data_url = $(this).attr('data-url');
-    var mypage = localStorage.getItem("mypage");
-    var name = $("input[name=name]").val();
-    var SS_deltaBuffer = localStorage.getItem("SS_deltaBuffer");
-    var maincss = localStorage.getItem("maincss");
-    var sectioncss = localStorage.getItem("sectioncss");
-    $.ajax({
-        url: data_url,
-        type: "post",
-        dataType: "text",
-        data: {
-            name: name,
-            mypage: mypage,
-            SS_deltaBuffer: SS_deltaBuffer,
-            maincss: maincss,
-            sectioncss: sectioncss
-        },
-        success: function(result) {
-            console.log(result);
-            // $("#des-campaign").html(result);
-            window.location.href = result;
-        },
-        error: function(result) {
-            console.log("error");
-            // console.log(result);
-        }
-    });
-});
-</script>
 
-<script>
-        $( document ).ready(function() {
-            var content_page = $("#mypage_content").text();
-            if(content_page){
-            localStorage.setItem('mypage', $("#mypage_content").text());
-            localStorage.setItem('maincss', '');
-            localStorage.setItem('SS_deltaBuffer', '120,120,120');
-            localStorage.setItem("sectioncss", '<link data-name="contentstyle" data-class="type-opensans" href="/vendor/contentbox5/assets/styles/type-opensans.css" rel="stylesheet">');
-            localStorage.getItem("mypage");
-            localStorage.getItem("sectioncss");
-            localStorage.getItem("SS_deltaBuffer");
-            localStorage.getItem("maincss");
-            } else {
-                
-            localStorage.removeItem('mypage');
-            localStorage.removeItem('maincss');
-            localStorage.removeItem('SS_deltaBuffer');
-            localStorage.removeItem("sectioncss");
-            }
-            
-        });
-          
-    </script>
 @stack('js')
 
 </body>

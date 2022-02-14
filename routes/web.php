@@ -8,15 +8,6 @@ use Sendportal\Base\Facades\Sendportal;
 use App\Http\Middleware\OwnsCurrentWorkspace;
 use App\Http\Middleware\RequireWorkspace;
 
-Route::get('/c', function () {
-    $run = Artisan::call('config:clear');
-    $run = Artisan::call('cache:clear');
-    $run = Artisan::call('route:clear');
-    $run = Artisan::call('config:cache');
-    $run = Artisan::call('storage:link');
-
-    return 'FINISHED';
-});
 Auth::routes(
     [
         'verify' => config('sendportal-host.auth.register', false),
@@ -24,18 +15,19 @@ Auth::routes(
         'reset' => config('sendportal-host.auth.password_reset'),
     ]
 );
-Route::get('/clear-cache', function () {
-    $run = Artisan::call('config:clear');
-    $run = Artisan::call('cache:clear');
-    $run = Artisan::call('config:cache');
-    return 'FINISHED';
-});
+    Route::get('/clear-cache', function() {
+        $run = Artisan::call('config:clear');
+        $run = Artisan::call('cache:clear');
+        $run = Artisan::call('config:cache');
+        return 'FINISHED';  
+    });
 Route::get('setup', 'SetupController@index')->name('setup');
 
 
 // Auth.
 Route::middleware('auth')->namespace('Auth')->group(
-    static function (Router $authRouter) {
+    static function (Router $authRouter)
+    {
         // Logout.
         $authRouter->get('logout', 'LoginController@logout')->name('logout');
 
@@ -49,16 +41,15 @@ Route::middleware('auth')->namespace('Auth')->group(
                 $profileRouter->put('/', 'ProfileController@update')->name('update');
             }
         );
-        $authRouter->middleware('verified')->name('drag_create.')->prefix('templates/drag_create')->group(
+        $authRouter->middleware('verified')->name('drag_template.')->prefix('templates/drag_template')->group(
             static function (
                 Router $drag_createRouter
             ) {
-                $drag_createRouter->get('/', 'DragController@create')->name('get.drag_create');
-                $drag_createRouter->post('/', 'DragController@store')->name('post.drag_create');
-                $drag_createRouter->post('/{id}', 'DragController@update')->name('post.drag_update');
+                $drag_createRouter->get('/', 'DragTemplateController@create')->name('get.drag_create');
+                $drag_createRouter->post('/', 'DragTemplateController@store')->name('post.drag_create');
+                $drag_createRouter->post('/{id}', 'DragTemplateController@update')->name('post.drag_update');
             }
         );
-
         // API Tokens.
         $authRouter->middleware('verified')->name('api-tokens.')->prefix('api-tokens')->group(static function (Router $apiTokenRouter) {
             $apiTokenRouter->get('/', [ApiTokenController::class, 'index'])->name('index');
@@ -74,14 +65,16 @@ Route::namespace('Workspaces')
     ->name('users.')
     ->prefix('users')
     ->group(
-        static function (Router $workspacesRouter) {
+        static function (Router $workspacesRouter)
+        {
             $workspacesRouter->get('/', 'WorkspaceUsersController@index')->name('index');
             $workspacesRouter->delete('{userId}', 'WorkspaceUsersController@destroy')->name('destroy');
 
             // Invitations.
             $workspacesRouter->name('invitations.')->prefix('invitations')
                 ->group(
-                    static function (Router $invitationsRouter) {
+                    static function (Router $invitationsRouter)
+                    {
                         $invitationsRouter->post('/', 'WorkspaceInvitationsController@store')->name('store');
                         $invitationsRouter->delete('{invitation}', 'WorkspaceInvitationsController@destroy')
                             ->name('destroy');
@@ -98,7 +91,8 @@ Route::namespace('Workspaces')->middleware(
         RequireWorkspace::class
     ]
 )->group(
-    static function (Router $workspaceRouter) {
+    static function (Router $workspaceRouter)
+    {
         $workspaceRouter->resource('workspaces', 'WorkspacesController')->except(
             [
                 'create',
@@ -120,7 +114,8 @@ Route::namespace('Workspaces')->middleware(
 );
 
 Route::middleware(['auth', 'verified', RequireWorkspace::class])->group(
-    static function () {
+    static function ()
+    {
         Sendportal::webRoutes();
     }
 );

@@ -11,7 +11,7 @@
                             <form action="{{ route('sendportal.templates.destroy', $template->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <a href="{{ route('sendportal.templates.edit', $template->id) }}"
+                                <a href="{{ route('drag_template.get.drag_edit', $template->id) }}"
                                    class="btn btn-xs btn-light">{{ __('Edit') }}</a>
                                 <button type="submit" class="btn btn-xs btn-light">{{ __('Delete') }}</button>
                             </form>

@@ -15,6 +15,6 @@ Route::middleware([
     Sendportal::apiRoutes();
 
 });
-
+Route::post('register', [AuthController::class, 'register']);
 // Non-auth'd API routes.
 Sendportal::publicApiRoutes();

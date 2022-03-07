@@ -15,7 +15,7 @@
 <div class="form-group row template-preview">
     <div class="col-12">
         <div class="border border-light h-100">
-            @include('drag_template.newsletter.index1')
+            @include('drag_template.newsletter.index')
         </div>
     </div>
 </div>
@@ -27,13 +27,7 @@
 
 <script>
     $(document).ready(function() {
-        var codeMirror = CodeMirror.fromTextArea(document.getElementById('id-field-content'), {
-            lineNumbers: true,
-            lineWrapping: true,
-            mode: 'xml',
-            theme: 'monokai',
-        });
-
+ 
         $('.btn-preview').click(function(e) {
             e.preventDefault();
 
@@ -53,32 +47,58 @@
             }
         });
     });
-    
 </script>
 <script>
-    $("#save-template").on("click", function() {
-    var data_url = $(this).attr('data-url');
-    var content = $("#wrapper");
-    var name = $("input[name=name]").val();
-
-    $.ajax({
-        url: data_url,
-        type: "post",
-        dataType: "text",
-        data: {
-            content: content,
-            name: name
-        },
-        success: function(result) {
-            console.log(result);
-            // $("#des-campaign").html(result);
-            window.location.href = result;
-        },
-        error: function(result) {
-            console.log("error");
-            // console.log(result);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-});
+    $("#save-template").on("click", function() {
+        var data_url = $(this).attr('data-url');
+        var data_id = $(this).attr('data-id');
+        var iframe = $('iframe');
+        var content = $(iframe).contents().find("#wrapper").html();
+        var name = $("input[name=name]").val();
+        var old_content = $("input[content=content]").val();
+        if(content == ''){
+            $("#content_err").text("Mẫu email không được để trống.")
+        } else {
+            $("#content_err").text('')
+        }
+        if(name == ''){
+            $("#name_err").text("Tên mẫu email không được để trống.")
+        } else {
+            $("#name_err").text('')
+        }
+        var ajx_url = '';
+        if(data_id == ''){
+            ajx_url = data_url;
+        } else {
+            ajx_url = data_url+'/edit/'+data_id;
+        };
+        if(name !='' && content != ''){
+            $.ajax({
+            url: ajx_url,
+            type: "post",
+            dataType: "text",
+            data: {
+                content: content,
+                name: name,
+                data_id: data_id
+            },
+            success: function(result) {
+                console.log(result);
+                // $("#des-campaign").html(result);
+                window.location.href = result;
+            },
+            error: function(result) {
+                console.log("error");
+                // console.log(result);
+            }
+        });
+        }
+       
+    });
 </script>
 @endpush

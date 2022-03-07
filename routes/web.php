@@ -47,7 +47,8 @@ Route::middleware('auth')->namespace('Auth')->group(
             ) {
                 $drag_createRouter->get('/', 'DragTemplateController@create')->name('get.drag_create');
                 $drag_createRouter->post('/', 'DragTemplateController@store')->name('post.drag_create');
-                $drag_createRouter->post('/{id}', 'DragTemplateController@update')->name('post.drag_update');
+                $drag_createRouter->get('/edit/{id}', 'DragTemplateController@edit')->name('get.drag_edit');
+                $drag_createRouter->post('/edit/{id}', 'DragTemplateController@update')->name('post.drag_update');
             }
         );
         // API Tokens.

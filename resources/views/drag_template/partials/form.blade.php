@@ -14,6 +14,7 @@
             <div class="col-sm-6">
                 <input id="id-field-name" class="form-control" name="name" type="text" value="{{ old('name', $template->name ?? '') }}">
             </div>
+           
             <input id="id-field-content" class="form-control" name="content" type="hidden" value="{{ old('content', $template->content ?? '') }}">
         </div>
 

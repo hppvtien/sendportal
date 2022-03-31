@@ -359,7 +359,7 @@
       },
       assetManager: {
         assets: images,
-        upload: 0,
+        upload: 4,
         uploadText: 'Uploading is not available in this demo',
       },
       container: '#gjs',

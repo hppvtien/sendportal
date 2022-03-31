@@ -10,16 +10,16 @@
         <div class="col-lg-8 offset-lg-2">
             <div class="card">
                 <div class="card-header">
-                    {{ __('Current Users') }}
+                    {{ __('Người dùng hiện tại') }}
                 </div>
 
                 <div class="card-table table-responsive">
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>{{ __('Name') }}</th>
+                            <th>{{ __('Họ tên') }}</th>
                             <th>{{ __('Email') }}</th>
-                            <th>{{ __('Role') }}</th>
+                            <th>{{ __('Quyền') }}</th>
                             <th>{{ __('Actions') }}</th>
                         </tr>
                         </thead>
@@ -59,7 +59,7 @@
             @if ( auth()->user()->ownsCurrentWorkspace() && count($invitations) > 0)
                 <div class="card mt-3">
                     <div class="card-header">
-                        {{ __('Invited Users') }}
+                        {{ __('Người dùng được mời') }}
                     </div>
 
                     <div class="card-table">
@@ -98,7 +98,7 @@
             @if ( auth()->user()->ownsCurrentWorkspace())
                 <div class="card mt-3">
                     <div class="card-header">
-                        {{ __('Invite User') }}
+                        {{ __('Mời thêm người dùng') }}
                     </div>
                     <div class="card-body">
 
@@ -108,7 +108,7 @@
 
                                 @csrf
                                 <div class="form-group row">
-                                    <label for="create-invitation-email" class="col-sm-2">{{ __('Email Address') }}</label>
+                                    <label for="create-invitation-email" class="col-sm-2">{{ __('Địa chỉ Email') }}</label>
 
                                     <div class="col-sm-6">
                                         <input type="text" id="create-invitation-email" class="form-control" name="email">
@@ -116,7 +116,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="offset-sm-2 col-sm-10">
-                                        <input type="submit" class="btn btn-md btn-primary" value="{{ __('Send Invite') }}">
+                                        <input type="submit" class="btn btn-md btn-primary" value="{{ __('Gửi lời mời') }}">
                                     </div>
                                 </div>
                             </form>

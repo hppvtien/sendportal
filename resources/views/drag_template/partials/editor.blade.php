@@ -61,6 +61,8 @@
         var content = $(iframe).contents().find("#wrapper").html();
         var name = $("input[name=name]").val();
         var old_content = $("input[content=content]").val();
+        console.log(content);
+        return false;
         if(content == ''){
             $("#content_err").text("Mẫu email không được để trống.")
         } else {

@@ -3,11 +3,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/theme/monokai.min.css">
 <style>
     .CodeMirror {
-        height: 600px;
+        height: 1000px;
     }
 
     .template-preview {
-        height: 600px;
+        height: 1000px;
     }
 </style>
 @endpush

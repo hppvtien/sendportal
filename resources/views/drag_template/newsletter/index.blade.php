@@ -5,11 +5,10 @@
             overflow: auto !important;
         }
     </style>
-    <link rel="stylesheet" href="https://grapesjs.com/stylesheets/grapes.min.css?v0.18.4">
-    <link rel="stylesheet" href="https://grapesjs.com/stylesheets/material.css">
-    <link rel="stylesheet" href="https://grapesjs.com/stylesheets/tooltip.css">
-    <link rel="stylesheet" href="https://grapesjs.com/stylesheets/toastr.min.css">
-    <link rel="stylesheet" href="https://grapesjs.com/stylesheets/demos.css?v2">
+    <link rel="stylesheet" href="{{ asset('newsletter/dist/grapes.min.css?v0.18.4') }}">
+    <link rel="stylesheet" href="{{ asset('newsletter/dist/material.css') }}">
+    <link rel="stylesheet" href="{{ asset('newsletter/dist/tooltip.css') }}">
+    <link rel="stylesheet" href="{{ asset('newsletter/dist/toastr.min.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @endpush
 
@@ -333,21 +332,21 @@
         </style>
     </div>
     @push('js')
-    <script src="https://grapesjs.com/js/aviary.js"></script>
-    <script src="https://grapesjs.com/js/grapes.min.js?v0.18.4"></script>
-    <script src="https://grapesjs.com/js/ckeditor/ckeditor.js"></script>
+    <script src="{{ asset('newsletter/dist/aviary.js') }}"></script>
+    <script src="{{ asset('newsletter/dist/grapes.min.js?v0.18.4') }}"></script>
+    <script src="{{ asset('newsletter/dist/ckeditor.js') }}"></script>
     <style>
         .cke {
             visibility: hidden;
         }
     </style>
-    <script src="https://grapesjs.com/js/grapesjs-plugin-ckeditor.min.js"></script>
-    <script src="https://grapesjs.com/js/grapesjs-preset-newsletter.min.js?v=0.2.21"></script>
-    <script src="https://grapesjs.com/js/grapesjs-aviary.min.js"></script>
-    <script src="https://grapesjs.com/js/toastr.min.js"></script>
-    <script src="https://grapesjs.com/js/ajaxable.min.js"></script>
+    <script src="{{ asset('newsletter/dist/grapesjs-plugin-ckeditor.min.js') }}"></script>
+    <script src="{{ asset('newsletter/dist/grapesjs-preset-newsletter.min.js?v=0.2.21') }}"></script>
+    <script src="{{ asset('newsletter/dist/grapesjs-aviary.min.js') }}"></script>
+    <script src="{{ asset('newsletter/dist/toastr.min.js') }}"></script>
+    <script src="{{ asset('newsletter/dist/ajaxable.min.js') }}"></script>
     <script type="text/javascript">
-        var host = 'http://artf.github.io/grapesjs/';
+        var host = 'http://artf.gieethub.io/grapesjs/';
         var images = [
             host + 'img/grapesjs-logo.png',
             host + 'img/tmp-blocks.jpg',

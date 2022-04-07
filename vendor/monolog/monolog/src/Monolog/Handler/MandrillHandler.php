@@ -52,6 +52,7 @@ class MandrillHandler extends MailHandler
      */
     protected function send(string $content, array $records): void
     {
+        dd('sdsdsdsd');
         $mime = 'text/plain';
         if ($this->isHtmlBody($content)) {
             $mime = 'text/html';

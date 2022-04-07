@@ -10,8 +10,8 @@
 
     @component('sendportal::layouts.partials.actions')
         @slot('right')
-            <a class="btn btn-primary btn-md btn-flat" href="{{ route('sendportal.templates.create') }}">
-                <i class="fa fa-plus mr-1"></i> {{ __('New Template') }}
+            <a class="btn btn-primary btn-md btn-flat" href="{{ route('drag_template.get.drag_create') }}">
+                <i class="fa fa-plus mr-1"></i> {{ __('Tạo Template') }}
             </a>
         @endslot
     @endcomponent

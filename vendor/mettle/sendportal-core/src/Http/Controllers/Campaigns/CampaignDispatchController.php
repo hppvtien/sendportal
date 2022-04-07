@@ -40,7 +40,6 @@ class CampaignDispatchController extends Controller
     public function send(CampaignDispatchRequest $request, int $id): RedirectResponse
     {
         $campaign = $this->campaigns->find(Sendportal::currentWorkspaceId(), $id, ['email_service', 'messages']);
-
         if ($campaign->status_id !== CampaignStatus::STATUS_DRAFT) {
             return redirect()->route('sendportal.campaigns.status', $id);
         }

@@ -12,8 +12,14 @@
         <div class="card-header">
             {{ __('Create Template') }}
         </div>
-        <div class="card-body">                
-                @include('drag_template.partials.form')
+        <div class="card-body">     
+                @if ($template_used < $template_limit_use)
+                    @include('drag_template.partials.form')
+                @else
+                    <p>Tài khoản của bạn chỉ được tạo tối đa <span class="text-danger">{{ $template_used }} Template.</span></p>
+                    <p>Bạn hãy liên hệ với quản trị để được hỗ trợ.</p>
+                @endif           
+                
         </div>
     </div>
 

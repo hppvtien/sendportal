@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\Workspace;
 use App\Models\User;
+use Carbon\Carbon;
 use App\Rules\ValidInvitation;
 use App\Services\Workspaces\AcceptInvitation;
 use App\Services\Workspaces\CreateWorkspace;
@@ -40,24 +41,30 @@ class RegisterController extends Controller
     {
         $data['user_id'] = $request->user_id;
         $data['name'] = $request->name;
-        $data['remember_token'] = $request->remember_token;
+        $data['api_token'] = $request->remember_token;
         $data['email'] = $request->email;
         $data['password'] = $request->password;
-        $param['company_name'] = $request->phone;
+        $data['current_workspace_id'] = 100;
         // $data['code_verication']  = Str::random(40);
-        return $data;
+        $data['email_verified_at']  = Carbon::now();
+       
         $users = User::where('user_id', $request->user_id)->first();
+        // return User::get();
         if ($users) {
             return $this->sendResponse('errors', 'Tài khoản đã tồn tại.');
         } else {
-            $userId = User::create($data);
+            $userId = User::insertGetId($data);
             if($userId){
+                $param['current_workspace_id']=$userId;
+                $update_wp = User::where('id', $userId)->first();
+                $update_wp->fill($param)->save();
                 $message = 'Tạo tài khoản thành công';
                 $status = 200;
             } else {
                 $message = 'Tạo tài khoản thất bại';
                 $status = 500;
             }
+            return $userId;
             return $this->sendResponse($status, $message);
         }
     }

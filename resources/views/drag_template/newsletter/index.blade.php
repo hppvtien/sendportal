@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ asset('newsletter/dist/toastr.min.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @endpush
-
+    
     <div id="gjs" style="height:0px; overflow:unset">
         {!! old('content', $template->content ?? '') !!}
         <style>

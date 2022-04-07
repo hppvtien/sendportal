@@ -89,13 +89,10 @@
                 data_id: data_id
             },
             success: function(result) {
-                console.log(result);
-                // $("#des-campaign").html(result);
                 window.location.href = result;
             },
             error: function(result) {
                 console.log("error");
-                // console.log(result);
             }
         });
         }

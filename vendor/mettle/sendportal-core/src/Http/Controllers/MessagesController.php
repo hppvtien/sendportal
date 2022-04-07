@@ -57,7 +57,6 @@ class MessagesController extends Controller
             50,
             $params
         );
-
         return view('sendportal::messages.index', compact('messages'));
     }
 
@@ -75,7 +74,7 @@ class MessagesController extends Controller
             50,
             ['draft' => true]
         );
-
+        
         return view('sendportal::messages.index', compact('messages'));
     }
 

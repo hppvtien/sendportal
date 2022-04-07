@@ -179,6 +179,7 @@ class CampaignsController extends Controller
      */
     public function status(int $id)
     {
+        dd('sdsdsdsd');
         $workspaceId = Sendportal::currentWorkspaceId();
         $campaign = $this->campaigns->find($workspaceId, $id, ['status']);
 

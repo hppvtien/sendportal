@@ -1,9 +1,9 @@
 @extends('sendportal::layouts.app')
 
-@section('title', __('Subscribers'))
+@section('title', __('Đăng ký nhận mail'))
 
 @section('heading')
-    {{ __('Subscribers') }}
+    {{ __('Đăng ký nhận mail') }}
 @endsection
 
 @section('content')

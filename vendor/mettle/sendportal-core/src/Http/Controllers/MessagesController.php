@@ -49,7 +49,6 @@ class MessagesController extends Controller
     {
         $params = request()->only(['search', 'status']);
         $params['sent'] = true;
-
         $messages = $this->messageRepo->paginateWithSource(
             Sendportal::currentWorkspaceId(),
             'sent_atDesc',

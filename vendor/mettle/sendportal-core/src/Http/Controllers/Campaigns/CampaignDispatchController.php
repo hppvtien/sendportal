@@ -54,14 +54,12 @@ class CampaignDispatchController extends Controller
         ]);
 
         $campaign->tags()->sync($request->get('tags'));
-
         if ($this->quotaService->exceedsQuota($campaign->email_service, $campaign->unsent_count)) {
             return redirect()->route('sendportal.campaigns.edit', $id)
                 ->withErrors(__('The number of subscribers for this campaign exceeds your SES quota'));
         }
 
         $scheduledAt = $request->get('schedule') === 'scheduled' ? Carbon::parse($request->get('scheduled_at')) : now();
-
         $campaign->update([
             'scheduled_at' => $scheduledAt,
             'status_id' => CampaignStatus::STATUS_QUEUED,

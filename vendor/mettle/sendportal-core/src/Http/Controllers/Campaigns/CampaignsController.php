@@ -64,7 +64,6 @@ class CampaignsController extends Controller
         $workspaceId = Sendportal::currentWorkspaceId();
         $params = ['draft' => true];
         $campaigns = $this->campaigns->paginate($workspaceId, 'created_atDesc', ['status'], 25, $params);
-
         return view('sendportal::campaigns.index', [
             'campaigns' => $campaigns,
             'campaignStats' => $this->campaignStatisticsService->getForPaginator($campaigns, $workspaceId),
@@ -163,13 +162,12 @@ class CampaignsController extends Controller
     {
         $campaign = $this->campaigns->find(Sendportal::currentWorkspaceId(), $id);
         $subscriberCount = $this->subscribers->countActive(Sendportal::currentWorkspaceId());
-
+        
         if (!$campaign->draft) {
             return redirect()->route('sendportal.campaigns.status', $id);
         }
 
         $tags = $this->tags->all(Sendportal::currentWorkspaceId(), 'name');
-
         return view('sendportal::campaigns.preview', compact('campaign', 'tags', 'subscriberCount'));
     }
 
@@ -179,10 +177,9 @@ class CampaignsController extends Controller
      */
     public function status(int $id)
     {
-        dd('sdsdsdsd');
         $workspaceId = Sendportal::currentWorkspaceId();
         $campaign = $this->campaigns->find($workspaceId, $id, ['status']);
-
+        // dd($campaign);
         if ($campaign->sent) {
             return redirect()->route('sendportal.campaigns.reports.index', $id);
         }

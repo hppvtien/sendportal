@@ -1,8 +1,8 @@
 @extends('sendportal::layouts.app')
 
-@section('title', __('Messages'))
+@section('title', __('Trạng thái mail'))
 
-@section('heading', __('Messages'))
+@section('heading', __('Trạng thái mail'))
 
 @section('content')
 

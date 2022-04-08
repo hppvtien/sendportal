@@ -1,9 +1,9 @@
 @extends('sendportal::layouts.app')
 
-@section('title', __('Campaigns'))
+@section('title', __('Chiến dịch'))
 
 @section('heading')
-    {{ __('Campaigns') }}
+    {{ __('Chiến dịch') }}
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
     @component('sendportal::layouts.partials.actions')
         @slot('right')
             <a class="btn btn-primary btn-md btn-flat" href="{{ route('sendportal.campaigns.create') }}">
-                <i class="fa fa-plus mr-1"></i> {{ __('New Campaign') }}
+                <i class="fa fa-plus mr-1"></i> {{ __('Thêm mới chiến dịch') }}
             </a>
         @endslot
     @endcomponent
@@ -29,8 +29,8 @@
                         <th>{{ __('Opened') }}</th>
                         <th>{{ __('Clicked') }}</th>
                     @endif
-                    <th>{{ __('Created') }}</th>
-                    <th>{{ __('Status') }}</th>
+                    <th>{{ __('Tạo cách đây') }}</th>
+                    <th>{{ __('Trạng thái') }}</th>
                     <th>{{ __('Actions') }}</th>
                 </tr>
                 </thead>
@@ -67,18 +67,18 @@
                                     @if ($campaign->draft)
                                         <a href="{{ route('sendportal.campaigns.edit', $campaign->id) }}"
                                            class="dropdown-item">
-                                            {{ __('Edit') }}
+                                            {{ __('Sửa') }}
                                         </a>
                                     @else
                                         <a href="{{ route('sendportal.campaigns.reports.index', $campaign->id) }}"
                                            class="dropdown-item">
-                                            {{ __('View Report') }}
+                                            {{ __('Thống kê') }}
                                         </a>
                                     @endif
 
                                     <a href="{{ route('sendportal.campaigns.duplicate', $campaign->id) }}"
                                        class="dropdown-item">
-                                        {{ __('Duplicate') }}
+                                        {{ __('Nhân bản chiến dịch') }}
                                     </a>
 
                                     @if($campaign->canBeCancelled())

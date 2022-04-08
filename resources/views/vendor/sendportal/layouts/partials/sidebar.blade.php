@@ -7,7 +7,7 @@
         </li>
         <li class="nav-item {{ request()->is('*campaigns*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('sendportal.campaigns.index') }}">
-                <i class="fa-fw fas fa-envelope mr-2"></i><span>{{ __('Campaigns') }}</span>
+                <i class="fa-fw fas fa-envelope mr-2"></i><span>{{ __('Chiến dịch') }}</span>
             </a>
         </li>
         @if (\Sendportal\Base\Facades\Helper::isPro())
@@ -24,17 +24,17 @@
         </li>
         <li class="nav-item {{ request()->is('*subscribers*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('sendportal.subscribers.index') }}">
-                <i class="fa-fw fas fa-user mr-2"></i><span>{{ __('Subscribers') }}</span>
+                <i class="fa-fw fas fa-user mr-2"></i><span>{{ __('Đăng ký nhận mail') }}</span>
             </a>
         </li>
         <li class="nav-item {{ request()->is('*messages*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('sendportal.messages.index') }}">
-                <i class="fa-fw fas fa-paper-plane mr-2"></i><span>{{ __('Messages') }}</span>
+                <i class="fa-fw fas fa-paper-plane mr-2"></i><span>{{ __('Trạng thái mail') }}</span>
             </a>
         </li>
         <li class="nav-item {{ request()->is('*email-services*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('sendportal.email_services.index') }}">
-                <i class="fa-fw fas fa-envelope mr-2"></i><span>{{ __('Email Services') }}</span>
+                <i class="fa-fw fas fa-envelope mr-2"></i><span>{{ __('Dịch vụ mail') }}</span>
             </a>
         </li>
 

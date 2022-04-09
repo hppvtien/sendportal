@@ -85,7 +85,6 @@ class MessagesController extends Controller
     public function show(int $messageId): View
     {
         $message = $this->messageRepo->find(Sendportal::currentWorkspaceId(), $messageId);
-
         $content = $this->mergeContentService->handle($message);
         $subject = $this->mergeSubjectService->handle($message);
 

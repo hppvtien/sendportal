@@ -28,7 +28,6 @@ class CampaignsController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        
         $workspaceId = Sendportal::currentWorkspaceId();
 
         return CampaignResource::collection($this->campaigns->paginate($workspaceId, 'id', ['tags']));

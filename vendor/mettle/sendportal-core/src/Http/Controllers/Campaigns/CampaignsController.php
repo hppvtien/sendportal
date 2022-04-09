@@ -61,6 +61,7 @@ class CampaignsController extends Controller
      */
     public function index(): ViewContract
     {
+        
         $workspaceId = Sendportal::currentWorkspaceId();
         $params = ['draft' => true];
         $campaigns = $this->campaigns->paginate($workspaceId, 'created_atDesc', ['status'], 25, $params);
@@ -97,7 +98,6 @@ class CampaignsController extends Controller
                 $emailService->formatted_name = "{$emailService->name} ({$emailService->type->name})";
                 return $emailService;
             });
-
         return view('sendportal::campaigns.create', compact('templates', 'emailServices'));
     }
 
@@ -108,7 +108,6 @@ class CampaignsController extends Controller
     {
         $workspaceId = Sendportal::currentWorkspaceId();
         $campaign = $this->campaigns->store($workspaceId, $this->handleCheckboxes($request->validated()));
-
         return redirect()->route('sendportal.campaigns.preview', $campaign->id);
     }
 

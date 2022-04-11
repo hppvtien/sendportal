@@ -3,7 +3,7 @@
 @section('title', __('Confirm Campaign'))
 
 @section('heading')
-    {{ __('Nội dung chiến dịch') }}: {{ $campaign->name }}
+{{ __('Nội dung chiến dịch') }}: {{ $campaign->name }}
 @stop
 
 @section('content')
@@ -79,7 +79,10 @@
                 </div>
                 <div class="card-body">
 
-                    <div class="pb-2"><b>{{ __('NGƯỜI GỬI') }}</b></div>
+                    <div class="pb-2">
+                        <b>{{ __('NGƯỜI GỬI') }}</b>
+                        <p class="text-danger">{{ __('Bạn có thể gửi được 10 mail nữa') }}</p>
+                    </div>
                     <div class="form-group row form-group-recipients">
                         <div class="col-sm-12">
                             <select id="id-field-recipients" class="form-control" name="recipients">
@@ -89,21 +92,26 @@
                                 <option value="send_to_tags" {{ (old('recipients') ? old('recipients') == 'send_to_tags' : !$campaign->send_to_all) ? 'selected' : '' }}>
                                     {{ __('Chọn Tags') }}
                                 </option>
+                                <option value="send_to_check" {{ (old('recipients') ? old('recipients') == 'send_to_check' : !$campaign->send_to_all) ? 'selected' : '' }}>
+                                    {{ __('Chọn trong danh sách') }}
+                                </option>
                             </select>
                         </div>
                     </div>
-
                     <div class="tags-container {{ (old('recipients') ? old('recipients') == 'send_to_tags' : !$campaign->send_to_all) ? '' : 'hide' }}">
                         @forelse($tags as $tag)
-                            <div class="checkbox">
-                                <label>
-                                    <input name="tags[]" type="checkbox" value="{{ $tag->id }}">
-                                    {{ $tag->name }} ({{ $tag->activeSubscribers()->count() }} {{ __('Người đăng ký') }})
-                                </label>
-                            </div>
+                        <div class="checkbox">
+                            <label>
+                                <input name="tags[]" type="checkbox" value="{{ $tag->id }}">
+                                {{ $tag->name }} ({{ $tag->activeSubscribers()->count() }} {{ __('Người đăng ký') }})
+                            </label>
+                        </div>
                         @empty
-                            <div>{{ __('Không có tags nào được chọn') }}</div>
+                        <div>{{ __('Không có tags nào được chọn') }}</div>
                         @endforelse
+                    </div>
+                    <div class="check-container text-center my-2">
+                        <button type="button" id="show-form-check-user" class="btn btn-secondary">Check email gửi</button>
                     </div>
 
                     <div class="pb-2"><b>{{ __('LỊCH GỬI') }}</b></div>
@@ -150,34 +158,43 @@
 @stop
 
 @push('css')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 @endpush
 
 @push('js')
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script>
-        var target = $('.tags-container');
-        $('#id-field-recipients').change(function() {
-            if (this.value == 'send_to_all') {
-                target.addClass('hide');
-            } else {
-                target.removeClass('hide');
-            }
-        });
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    var target = $('.tags-container');
+    var target_check = $('.check-container');
+    $('#id-field-recipients').change(function() {
+        if (this.value == 'send_to_all') {
+            target.addClass('hide');
+            target_check.addClass('hide');
+        } else if (this.value == 'send_to_tags') {
+            target.removeClass('hide');
+            target_check.addClass('hide');
+        } else {
+            target.addClass('hide')
+            target_check.removeClass('hide');
+        }
+    });
 
-        var element = $('#input-field-scheduled_at');
-        $('#id-field-schedule').change(function() {
-            if (this.value == 'now') {
-                element.addClass('hide');
-            } else {
-                element.removeClass('hide');
-            }
-        });
+    var element = $('#input-field-scheduled_at');
+    $('#id-field-schedule').change(function() {
+        if (this.value == 'now') {
+            element.addClass('hide');
+        } else {
+            element.removeClass('hide');
+        }
+    });
 
-        $('#input-field-scheduled_at').flatpickr({
-            enableTime: true,
-            time_24hr: true,
-            dateFormat: "Y-m-d H:i",
-        });
-    </script>
+    $('#input-field-scheduled_at').flatpickr({
+        enableTime: true,
+        time_24hr: true,
+        dateFormat: "Y-m-d H:i",
+    });
+    $('#show-form-check-user').click(function() {
+      alert('show-form-check-user');
+    });
+</script>
 @endpush

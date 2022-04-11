@@ -69,7 +69,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @forelse($messages as $message)
+                    @forelse($messages as $key => $message)
                         <tr>
                             <td>
                                 {{ $message->sent_at ?? $message->created_at }}

@@ -61,7 +61,6 @@ class CampaignsController extends Controller
      */
     public function index(): ViewContract
     {
-        
         $workspaceId = Sendportal::currentWorkspaceId();
         $params = ['draft' => true];
         $campaigns = $this->campaigns->paginate($workspaceId, 'created_atDesc', ['status'], 25, $params);
@@ -161,7 +160,6 @@ class CampaignsController extends Controller
     {
         $campaign = $this->campaigns->find(Sendportal::currentWorkspaceId(), $id);
         $subscriberCount = $this->subscribers->countActive(Sendportal::currentWorkspaceId());
-        
         if (!$campaign->draft) {
             return redirect()->route('sendportal.campaigns.status', $id);
         }

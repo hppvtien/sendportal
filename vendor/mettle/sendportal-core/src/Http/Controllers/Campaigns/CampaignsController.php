@@ -17,6 +17,8 @@ use Sendportal\Base\Repositories\Subscribers\SubscriberTenantRepositoryInterface
 use Sendportal\Base\Repositories\TagTenantRepository;
 use Sendportal\Base\Repositories\TemplateTenantRepository;
 use Sendportal\Base\Services\Campaigns\CampaignStatisticsService;
+use Illuminate\Http\Request;
+use Sendportal\Base\Http\Resources\Subscriber;
 
 class CampaignsController extends Controller
 {
@@ -166,6 +168,31 @@ class CampaignsController extends Controller
 
         $tags = $this->tags->all(Sendportal::currentWorkspaceId(), 'name');
         return view('sendportal::campaigns.preview', compact('campaign', 'tags', 'subscriberCount'));
+    }
+    /**
+     * @return RedirectResponse|ViewContract
+     * @throws Exception
+     */
+    public function getSubscriber(Request $request)
+    {
+        $workspace_id = $request->workspace_id;
+        $subscriber = \DB::table('sendportal_subscribers')->where('workspace_id',$workspace_id)->get();
+        $html = view('sendportal::campaigns.get_subscribers',  compact('subscriber'))->render();
+        return $html;
+      
+    }
+    /**
+     * @return RedirectResponse|ViewContract
+     * @throws Exception
+     */
+    public function createListSub(Request $request)
+    {
+        dd($request->all());
+        $workspace_id = $request->workspace_id;
+        $subscriber = \DB::table('sendportal_subscribers')->where('workspace_id',$workspace_id)->get();
+        $html = view('sendportal::campaigns.get_subscribers',  compact('subscriber'))->render();
+        return $html;
+      
     }
 
     /**

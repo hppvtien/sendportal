@@ -111,9 +111,26 @@
                         @endforelse
                     </div>
                     <div class="check-container text-center my-2">
-                        <button type="button" id="show-form-check-user" class="btn btn-secondary">Check email gửi</button>
+                        <button type="button" id="show-form-check-user" data-toggle="modal" data-target=".bd-example-modal-lg" data-url="{{ route('sendportal.campaigns.getSubscriber',Sendportal\Base\Facades\Sendportal::currentWorkspaceId()) }}" workspace-id="{{ Sendportal\Base\Facades\Sendportal::currentWorkspaceId() }}" class="btn btn-secondary">{{ __('Chọn mail để Gửi') }}</button>
                     </div>
-
+                    <div class="modal fade bd-example-modal-lg" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" id="subcribers-tag">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                    <button type="button" class="btn btn-primary" id="create-list-sub" data-url="{{ route('sendportal.campaigns.createListSub',Sendportal\Base\Facades\Sendportal::currentWorkspaceId()) }}">Tạo danh sách gửi</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="pb-2"><b>{{ __('LỊCH GỬI') }}</b></div>
                     <div class="form-group row form-group-schedule">
                         <div class="col-sm-12">
@@ -194,7 +211,42 @@
         dateFormat: "Y-m-d H:i",
     });
     $('#show-form-check-user').click(function() {
-      alert('show-form-check-user');
+        var workspace_id = $(this).attr('workspace-id');
+        var data_url = $(this).attr('data-url');
+        $.ajax({
+            url: data_url,
+            type: "get",
+            dataType: "text",
+            data: {
+                workspace_id: workspace_id,
+            },
+            success: function(result) {
+                
+                $('#subcribers-tag').html(result);
+            },
+            error: function(result) {
+                console.log("Loiiiiiiiiiiiiiii");
+            }
+        });
+    });
+    $('#create-list-sub').click(function() {
+        var workspace_id = $('#show-form-check-user').attr('workspace-id');
+        var subscriibers_id = $('input[name="subscriibers_id"]:checked').serialize();
+        var data_url = $(this).attr('data-url');
+        $.ajax({
+            url: data_url,
+            type: "get",
+            dataType: "text",
+            data: {
+                subscriibers_id: subscriibers_id,
+            },
+            success: function(result) {
+                $('#subcribers-tag').html(result);
+            },
+            error: function(result) {
+                console.log("Loiiiiiiiiiiiiiii");
+            }
+        });
     });
 </script>
 @endpush

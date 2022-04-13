@@ -89,26 +89,15 @@
                                 <option value="send_to_all" {{ (old('recipients') ? old('recipients') == 'send_to_all' : $campaign->send_to_all) ? 'selected' : '' }}>
                                     {{ __('Tất cả người đăng ký') }} ({{ $subscriberCount }})
                                 </option>
-                                <option value="send_to_tags" {{ (old('recipients') ? old('recipients') == 'send_to_tags' : !$campaign->send_to_all) ? 'selected' : '' }}>
-                                    {{ __('Chọn Tags') }}
-                                </option>
+
                                 <option value="send_to_check" {{ (old('recipients') ? old('recipients') == 'send_to_check' : !$campaign->send_to_all) ? 'selected' : '' }}>
                                     {{ __('Chọn trong danh sách') }}
                                 </option>
                             </select>
                         </div>
                     </div>
-                    <div class="tags-container {{ (old('recipients') ? old('recipients') == 'send_to_tags' : !$campaign->send_to_all) ? '' : 'hide' }}">
-                        @forelse($tags as $tag)
-                        <div class="checkbox">
-                            <label>
-                                <input name="tags[]" type="checkbox" value="{{ $tag->id }}">
-                                {{ $tag->name }} ({{ $tag->activeSubscribers()->count() }} {{ __('Người đăng ký') }})
-                            </label>
-                        </div>
-                        @empty
-                        <div>{{ __('Không có tags nào được chọn') }}</div>
-                        @endforelse
+                    <div class="list-send text-center my-2">
+                    
                     </div>
                     <div class="check-container text-center my-2">
                         <button type="button" id="show-form-check-user" data-toggle="modal" data-target=".bd-example-modal-lg" data-url="{{ route('sendportal.campaigns.getSubscriber',Sendportal\Base\Facades\Sendportal::currentWorkspaceId()) }}" workspace-id="{{ Sendportal\Base\Facades\Sendportal::currentWorkspaceId() }}" class="btn btn-secondary">{{ __('Chọn mail để Gửi') }}</button>
@@ -117,7 +106,7 @@
                         <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Danh sách nhận mail</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -179,19 +168,17 @@
 @endpush
 
 @push('js')
+<script>
+    var EDIT_URL = '{{ route("sendportal.campaigns.editSubscriber",Sendportal\Base\Facades\Sendportal::currentWorkspaceId()) }}'
+</script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
     var target = $('.tags-container');
     var target_check = $('.check-container');
     $('#id-field-recipients').change(function() {
         if (this.value == 'send_to_all') {
-            target.addClass('hide');
-            target_check.addClass('hide');
-        } else if (this.value == 'send_to_tags') {
-            target.removeClass('hide');
             target_check.addClass('hide');
         } else {
-            target.addClass('hide')
             target_check.removeClass('hide');
         }
     });
@@ -221,7 +208,7 @@
                 workspace_id: workspace_id,
             },
             success: function(result) {
-                
+
                 $('#subcribers-tag').html(result);
             },
             error: function(result) {
@@ -231,7 +218,10 @@
     });
     $('#create-list-sub').click(function() {
         var workspace_id = $('#show-form-check-user').attr('workspace-id');
-        var subscriibers_id = $('input[name="subscriibers_id"]:checked').serialize();
+        var subscriibers_id = [];
+        $("input[name=subscriibers_id]:checked").each(function(i) {
+            subscriibers_id.push($(this).val());
+        });
         var data_url = $(this).attr('data-url');
         $.ajax({
             url: data_url,
@@ -239,13 +229,38 @@
             dataType: "text",
             data: {
                 subscriibers_id: subscriibers_id,
+                workspace_id: workspace_id,
             },
             success: function(result) {
-                $('#subcribers-tag').html(result);
+                $('.alert-success').html('<h5 class="text-success p-2 text-center">Bạn đã tạo thành công danh sách người nhận mail</h5>');
+                $('#create-list-sub').hide();
+                var obj = jQuery.parseJSON(result);
+                var html_ap = '<a href="javascript:;" data-toggle="modal" data-target=".bd-example-modal-lg" class="edit-list-sub" tagID="' + obj.id + '">' + obj.name + '</a><input name="tags[]" type="hidden" value="' + obj.id + '">';
+                $('.list-send').html(html_ap)
             },
             error: function(result) {
                 console.log("Loiiiiiiiiiiiiiii");
             }
+        });
+    });
+    $(document).ready(function() {
+        $('.list-send').click(function() {
+            var tagid = $('.edit-list-sub').attr('tagid');
+            $.ajax({
+            url: EDIT_URL,
+            type: "get",
+            dataType: "text",
+            data: {
+                tagid: tagid,
+            },
+            success: function(result) {
+                $('#subcribers-tag').html(result);
+                console.log(result);
+            },
+            error: function(result) {
+                console.log("Loiiiiiiiiiiiiiii");
+            }
+        });
         });
     });
 </script>

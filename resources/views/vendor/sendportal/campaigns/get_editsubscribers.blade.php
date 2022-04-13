@@ -15,27 +15,7 @@
             <div class="col-lg-8 offset-lg-2">
             </div>
         </div>
-        <div class="d-flex flex-column flex-md-row justify-content-between mb-3">
         
-                <form action="http://127.0.0.1:8000/subscribers" method="GET" class="form-inline mb-3 mb-md-0">
-                    <input class="form-control form-control-sm" name="name" type="text" value=""
-                        placeholder="Search...">
-
-                    <div class="mr-2">
-                        <select name="status" class="form-control form-control-sm">
-                            <option value="all">All</option>
-                            <option value="subscribed" selected="">Subscribed</option>
-                            <option value="unsubscribed">Unsubscribed</option>
-                        </select>
-                    </div>
-
-                    <button type="button" class="btn btn-light btn-md">Search</button>
-
-                    <a href="javascript:;" class="btn btn-md btn-light">Clear</a>
-                </form>
-           
-
-        </div>
         <div class="card">
             <div class="card-table table-responsive">
                 <table class="table">

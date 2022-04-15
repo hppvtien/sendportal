@@ -12,6 +12,7 @@ use Sendportal\Base\Http\Controllers\Controller;
 use Sendportal\Base\Http\Requests\CampaignDispatchRequest;
 use Sendportal\Base\Interfaces\QuotaServiceInterface;
 use Sendportal\Base\Models\CampaignStatus;
+use Sendportal\Base\Models\Tag;
 use Sendportal\Base\Repositories\Campaigns\CampaignTenantRepositoryInterface;
 
 class CampaignDispatchController extends Controller
@@ -52,7 +53,10 @@ class CampaignDispatchController extends Controller
         $campaign->update([
             'send_to_all' => $request->get('recipients') === 'send_to_all',
         ]);
-
+        if($request['tags'] != null){
+            \DB::table('sendportal_tags')->where('id',$request['tags'][0])->update(['sent_status'=>1]);
+        }
+        
         $campaign->tags()->sync($request->get('tags'));
         if ($this->quotaService->exceedsQuota($campaign->email_service, $campaign->unsent_count)) {
             return redirect()->route('sendportal.campaigns.edit', $id)

@@ -58,10 +58,10 @@
         var data_url = $(this).attr('data-url');
         var data_id = $(this).attr('data-id');
         var iframe = $('iframe');
-        var content = $(iframe).contents().find("[data-gjs-type='wrapper']").html();
+        var content = $(iframe).contents().find(".gjs-dashed").html();
+   
         var name = $("input[name=name]").val();
         var old_content = $("input[name=content]").val();
-        // console.log(old_content);
         if(content == ''){
             $("#content_err").text("Mẫu email không được để trống.")
         } else {

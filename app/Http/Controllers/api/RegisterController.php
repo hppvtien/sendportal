@@ -68,6 +68,48 @@ class RegisterController extends Controller
             return $this->sendResponse($status, $message);
         }
     }
+   /**
+     * return error response.
+     * @param email email đăng nhập
+     * @param _token token: so sánh đăng ký
+     * @param purchase_id id gói dịch vụ đăng ký
+     * @param pur_campaign số lượng chiến dịch tối đa trong dịch vụ
+     * @param pur_user số lượng user tối đa trong chiến dịch
+     * @return \Illuminate\Http\Response $token
+     */
+    public function updatePurchase(Request $request)
+    {
+        $data['purchase_id'] = $request->purchase_id;
+        $data['pur_campaign'] = $request->pur_campaign;
+        $data['pur_user'] = $request->pur_user;
+        $data['remember_token'] = $request->_token;
+        $data['email'] = $request->email;
+        $data['adigital_id'] =  $request->adigital_id;
+        $users = Supplier::where('adigital_id', $data['adigital_id'])->where('remember_token', $request->_token)->first();
+
+        if (isset($users)) {
+            $data['finished_at'] = date('Y-m-d H:i:s', strtotime(Carbon::now() . ' + 30 days'));
+            // return $data;
+            $users->fill($data)->save();
+            $token_aff =  $users->createToken('MyApp')->plainTextToken;
+            return $this->sendResponse($token_aff, 'Update đơn hàng thành công !!!');
+        } else {
+            $data['password'] = $request->password;
+            $data['phone'] = $request->phone;
+            $data['status'] = 1;
+            $data['finished_at'] = Carbon::now();
+            $data['updated_at'] = Carbon::now();
+            $data['status'] = 1;
+            $userId = Supplier::create($data)->id;
+            if ($userId) {
+                $newusers = Supplier::where('id', $userId)->first();
+                $token_aff =  $newusers->createToken('MyApp')->plainTextToken;
+                return $this->sendResponse($token_aff, 'Tài khoản đã được thêm mới');
+            } else {
+                return $this->sendResponse('error', 'Thông tin chưa chính xác, vui lòng kiểm tra lại');
+            }
+        }
+    }
 
    
 }

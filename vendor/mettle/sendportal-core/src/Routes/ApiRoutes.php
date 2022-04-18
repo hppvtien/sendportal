@@ -50,6 +50,7 @@ class ApiRoutes
 
             $this->get('v1/ping', '\Sendportal\Base\Http\Controllers\Api\PingController@index');
             $this->post('v1/register', '\App\Http\Controllers\API\RegisterController@register');
+            $this->post('v1/updatePurchase', '\App\Http\Controllers\API\UpdatePurchaseController@updatePurchase');
         };
     }
 }

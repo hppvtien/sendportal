@@ -45,31 +45,39 @@ class UpdatePurchaseController extends Controller
         $data['adigital_id'] =  $request->adigital_id;
         $data['email'] =  $request->email;
         $users = User::where('adigital_id', $data['adigital_id'])->where('remember_token', $request->_token)->first();
-
         if (isset($users)) {
             $data['finished_at'] = date('Y-m-d H:i:s', strtotime(Carbon::now() . ' + 30 days'));
             // return $data;
             $users->fill($data)->save();
-            $token_aff =  $users->createToken('MyApp')->plainTextToken;
-            return $this->sendResponse($token_aff, 'Update đơn hàng thành công !!!');
+            return response([
+                'message' => __('Update đơn hàng thành công !!!')
+            ], 200);
+            // $token_aff =  $users->createToken('MyApp')->plainTextToken;
+            // return $this->sendResponse($token_aff, 'Update đơn hàng thành công !!!');
         } else {
             $data['password'] = $request->password;
-            $data['phone'] = $request->phone;
+            // $data['phone'] = $request->phone;
             $data['name'] = $request->name;
-            $data['status'] = 1;
-            $data['finished_at'] = Carbon::now();
+            $data['locale'] = 'en';
+            $data['finished_at'] = date('Y-m-d H:i:s', strtotime(Carbon::now() . ' + 30 days'));
             $data['updated_at'] = Carbon::now();
             $data['email_verified_at'] = Carbon::now();
-            $data['status'] = 1;
+            // $data['status'] = 1;
+            $data['current_workspace_id'] = 1;
             $userId = User::create($data)->id;
             if ($userId) {
                 $crr_w_id['current_workspace_id'] = $userId;
                 $user_data = User::find($userId);
                 $user_data->fill($crr_w_id)->save();
-                $token_aff =  $user_data->createToken('MyApp')->plainTextToken;
-                return $this->sendResponse($token_aff, 'Tài khoản đã được thêm mới');
+                return response([
+                    'message' => __('Tài khoản đã được thêm mới')
+                ], 200);
+                // return $this->sendResponse('success', 'Tài khoản đã được thêm mới');
             } else {
-                return $this->sendResponse('error', 'Thông tin chưa chính xác, vui lòng kiểm tra lại');
+                return response([
+                    'message' => __('Thông tin chưa chính xác, vui lòng kiểm tra lại')
+                ], 401);
+                // return $this->sendResponse('error', 'Thông tin chưa chính xác, vui lòng kiểm tra lại');
             }
         }
     }

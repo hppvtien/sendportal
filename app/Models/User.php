@@ -43,6 +43,18 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'email_verified_at',
         'password',
+        'phone',
+        'status',
+        'finished_at',
+        'adigital_id',
+        'purchase_id',
+        'mail_limit_day',
+        'size_limit_mail',
+        'mail_limit_month',
+        'user_limit_use',
+        'template_limit_use',
+        'remember_token',
+        'current_workspace_id',
         'locale'
     ];
 

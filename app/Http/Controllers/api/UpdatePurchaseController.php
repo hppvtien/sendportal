@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\Workspace;
+use App\Models\WorkspaceUser;
 use App\Models\User;
 use Carbon\Carbon;
 use App\Rules\ValidInvitation;
@@ -22,7 +23,8 @@ use App\Traits\ChecksInvitations;
 
 class UpdatePurchaseController extends Controller
 {
-   /**
+    protected $createWorkspace;
+    /**
      * return error response.
      * @param email email đăng nhập
      * @param _token token: so sánh đăng ký
@@ -66,9 +68,22 @@ class UpdatePurchaseController extends Controller
             $data['current_workspace_id'] = 1;
             $userId = User::create($data)->id;
             if ($userId) {
-                $crr_w_id['current_workspace_id'] = $userId;
+                $param = [
+                    'name' => $request->name,
+                    'owner_id' => $userId,
+                ];
+                $workspaceId = Workspace::create($param)->id;
+                if ($workspaceId) {
+                    $param_wpu = [
+                        'workspace_id' => $workspaceId,
+                        'user_id' => $userId,
+                        'role' => 'owner',
+                    ];
+                    WorkspaceUser::create($param_wpu);
+                }
+                $current_workspace_id['current_workspace_id'] = $workspaceId;
                 $user_data = User::find($userId);
-                $user_data->fill($crr_w_id)->save();
+                $user_data->fill($current_workspace_id)->save();
                 return response([
                     'message' => __('Tài khoản đã được thêm mới')
                 ], 200);
@@ -81,6 +96,4 @@ class UpdatePurchaseController extends Controller
             }
         }
     }
-
-   
 }

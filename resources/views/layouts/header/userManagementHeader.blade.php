@@ -42,20 +42,20 @@
 
                 {{-- My Profile --}}
                 <a class="dropdown-item px-3" href="{{ route('profile.show') }}"><i
-                            class="fas fa-user mr-2 color-gray-300"></i>{{ __('My Profile') }}</a>
+                            class="fas fa-user mr-2 color-gray-300"></i>{{ __('Thông tin cá nhân') }}</a>
 
                 {{-- Workspaces --}}
-                <a class="dropdown-item px-3" href="{{ route('workspaces.index') }}"><i
-                            class="fas fa-layer-group mr-2 color-gray-300"></i>{{ __('Workspaces') }}</a>
+                <!-- <a class="dropdown-item px-3" href="{{ route('workspaces.index') }}"><i
+                            class="fas fa-layer-group mr-2 color-gray-300"></i>{{ __('Không gian') }}</a> -->
 
                 {{-- API Tokens --}}
-                <a class="dropdown-item px-3" href="{{ route('api-tokens.index') }}"><i
-                            class="fas fa-layer-group mr-2 color-gray-300"></i>{{ __('API Tokens') }}</a>
+                <!-- <a class="dropdown-item px-3" href="{{ route('api-tokens.index') }}"><i
+                            class="fas fa-layer-group mr-2 color-gray-300"></i>{{ __('API Tokens') }}</a> -->
 
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item px-3" href="{{ route('logout') }}"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
-                            class="fas fa-sign-out-alt mr-2 color-gray-300"></i>Log out</a>
+                            class="fas fa-sign-out-alt mr-2 color-gray-300"></i>Đăng xuất</a>
             </div>
         </li>
     </ul>

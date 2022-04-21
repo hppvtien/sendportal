@@ -22,25 +22,25 @@
                             <option
                                 value="all" {{ request('status') == 'all' ? 'selected' : '' }}>{{ __('All') }}</option>
                             <option
-                                value="sent" {{ request('status') == 'sent' ? 'selected' : '' }}>{{ __('Sent') }}</option>
+                                value="sent" {{ request('status') == 'sent' ? 'selected' : '' }}>{{ __('Đã gửi') }}</option>
                             <option
-                                value="delivered" {{ request('status') == 'delivered' ? 'selected' : '' }}>{{ __('Delivered') }}</option>
+                                value="delivered" {{ request('status') == 'delivered' ? 'selected' : '' }}>{{ __('Đã gửi thành công') }}</option>
                             <option
-                                value="opened" {{ request('status') == 'opened' ? 'selected' : '' }}>{{ __('Opened') }}</option>
+                                value="opened" {{ request('status') == 'opened' ? 'selected' : '' }}>{{ __('Đã đọc') }}</option>
                             <option
-                                value="clicked" {{ request('status') == 'clicked' ? 'selected' : '' }}>{{ __('Clicked') }}</option>
+                                value="clicked" {{ request('status') == 'clicked' ? 'selected' : '' }}>{{ __('Đã click') }}</option>
                             <option
-                                value="unsubscribed" {{ request('status') == 'unsubscribed' ? 'selected' : '' }}>{{ __('Unsubscribed') }}</option>
+                                value="unsubscribed" {{ request('status') == 'unsubscribed' ? 'selected' : '' }}>{{ __('Hủy đăng ký') }}</option>
                             <option
-                                value="bounced" {{ request('status') == 'bounced' ? 'selected' : '' }}>{{ __('Bounced') }}</option>
+                                value="bounced" {{ request('status') == 'bounced' ? 'selected' : '' }}>{{ __('Đã bị hủy') }}</option>
                         </select>
                     </div>
                 @endif
 
-                <button type="submit" class="btn btn-light">{{ __('Search') }}</button>
+                <button type="submit" class="btn btn-light">{{ __('Tìm kiếm') }}</button>
 
                 @if(request()->anyFilled(['search', 'status']))
-                    <a href="{{ route('sendportal.messages.index') }}" class="btn btn-light">{{ __('Clear') }}</a>
+                    <a href="{{ route('sendportal.messages.index') }}" class="btn btn-light">{{ __('Xóa') }}</a>
                 @endif
             </form>
         @endslot
@@ -51,11 +51,11 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>{{ __('Date') }}</th>
-                    <th>{{ __('Subject') }}</th>
-                    <th>{{ __('Source') }}</th>
-                    <th>{{ __('Recipient') }}</th>
-                    <th>{{ __('Status') }}</th>
+                    <th>{{ __('Ngày tháng') }}</th>
+                    <th>{{ __('Tiêu đề') }}</th>
+                    <th>{{ __('Nguồn') }}</th>
+                    <th>{{ __('Người nhận') }}</th>
+                    <th>{{ __('Trạng thái') }}</th>
                     @if(request()->route()->named('sendportal.messages.draft'))
                         <th>{{ __('Actions') }}</th>
                         <th>

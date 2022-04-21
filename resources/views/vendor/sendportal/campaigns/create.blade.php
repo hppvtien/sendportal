@@ -1,8 +1,8 @@
 @extends('sendportal::layouts.app')
 
-@section('title', __('Create Campaign'))
+@section('title', __('Tạo chiến dịch'))
 
-@section('heading', __('Campaigns'))
+@section('heading', __('Chiến dịch'))
 
 @section('content')
 
@@ -18,7 +18,7 @@
             <div class="col-lg-8 offset-lg-2">
                 <div class="card">
                     <div class="card-header">
-                        {{ __('Create Campaign') }}
+                        {{ __('Tạo chiến dịch') }}
                     </div>
                     <div class="card-body">
                         <form action="{{ route('sendportal.campaigns.store') }}" method="POST" class="form-horizontal">

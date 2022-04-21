@@ -1,13 +1,13 @@
 @extends('sendportal::layouts.app')
 
 @section('heading')
-    {{ __('Email Services') }}
+    {{ __('Dịch vụ mail') }}
 @stop
 
 @section('content')
 
     @component('sendportal::layouts.partials.card')
-        @slot('cardHeader', __('Edit Email Service'))
+        @slot('cardHeader', __('Sửa dịch vụ mail'))
 
         @slot('cardBody')
             <form action="{{ route('sendportal.email_services.update', $emailService->id) }}" method="POST" class="form-horizontal">

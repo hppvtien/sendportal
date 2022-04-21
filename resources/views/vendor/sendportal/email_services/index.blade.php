@@ -1,9 +1,9 @@
 @extends('sendportal::layouts.app')
 
-@section('title', __('Email Services'))
+@section('title', __('Dịch vụ mail'))
 
 @section('heading')
-    {{ __('Email Services') }}
+    {{ __('Dịch vụ mail') }}
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
     @component('sendportal::layouts.partials.actions')
         @slot('right')
             <a class="btn btn-primary btn-md btn-flat" href="{{ route('sendportal.email_services.create') }}">
-                <i class="fa fa-plus mr-1"></i> {{ __('Add Email Service') }}
+                <i class="fa fa-plus mr-1"></i> {{ __('Thêm dịch vụ mail') }}
             </a>
         @endslot
     @endcomponent
@@ -22,7 +22,7 @@
                 <thead>
                 <tr>
                     <th>{{ __('Name') }}</th>
-                    <th>{{ __('Service') }}</th>
+                    <th>{{ __('Dịch vụ') }}</th>
                     <th>{{ __('Actions') }}</th>
                 </tr>
                 </thead>

@@ -1,7 +1,7 @@
 @extends('sendportal::layouts.app')
 
 @section('heading')
-    {{ __('Workspace Members') }}
+    {{ __('Không gian thành viên') }}
 @endsection
 
 @section('content')

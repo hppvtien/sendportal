@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header card-header-accent">
                     <div class="card-header-inner">
-                        {{ __('Profile') }}
+                        {{ __('Thông tin') }}
                     </div>
                 </div>
                 <table class="table">
@@ -22,7 +22,7 @@
                     </tr>
 
                     <tr>
-                        <th>{{ __('Locale') }}</th>
+                        <th>{{ __('Địa chỉ') }}</th>
                         <td>{{ auth()->user()->locale }}</td>
                     </tr>
                     </tbody>

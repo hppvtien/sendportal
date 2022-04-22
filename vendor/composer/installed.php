@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'dfa03fea4439243a729c149fc41635336c6e23ae',
+        'reference' => '69d80dbebab5266e0f82188530694417fa016c59',
         'name' => 'mettle/sendportal',
         'dev' => true,
     ),
@@ -607,7 +607,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'dfa03fea4439243a729c149fc41635336c6e23ae',
+            'reference' => '69d80dbebab5266e0f82188530694417fa016c59',
             'dev_requirement' => false,
         ),
         'mettle/sendportal-core' => array(
@@ -1021,8 +1021,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0',
             ),
         ),
         'psr/simple-cache' => array(

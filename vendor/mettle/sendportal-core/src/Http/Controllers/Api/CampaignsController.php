@@ -55,7 +55,6 @@ class CampaignsController extends Controller
      */
     public function show(int $id): CampaignResource
     {
-        
         $workspaceId = Sendportal::currentWorkspaceId();
         $campaign = $this->campaigns->find($workspaceId, $id);
 

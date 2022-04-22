@@ -14,6 +14,7 @@ use Sendportal\Base\Http\Requests\Api\TagSubscriberUpdateRequest;
 use Sendportal\Base\Http\Resources\Subscriber as SubscriberResource;
 use Sendportal\Base\Repositories\TagTenantRepository;
 use Sendportal\Base\Services\Tags\ApiTagSubscriberService;
+
 class TagSubscribersController extends Controller
 {
     /** @var TagTenantRepository */

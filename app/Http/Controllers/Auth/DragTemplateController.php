@@ -40,16 +40,14 @@ class DragTemplateController extends Controller
             'created_at'=>Carbon::now(),
             'size_template'=>strlen(json_encode($request->content))
         ];
-        if($template_limit_use < $template_used){
+        // dd($param);
+        if($template_limit_use > $template_used){
             $templateId = \DB::table('sendportal_templates')->insertGetId(
                 $param
             );
            
         }
-        return route('sendportal.templates.index');
-       
-        
-        
+        return route('sendportal.templates.index');   
     }
     public function edit(Request $request, $id)
     {

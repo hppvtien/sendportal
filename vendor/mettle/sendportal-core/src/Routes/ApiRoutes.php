@@ -45,10 +45,12 @@ class ApiRoutes
                 $webhookRouter->post('postmark', 'PostmarkWebhooksController@handle')->name('postmark');
                 $webhookRouter->post('sendgrid', 'SendgridWebhooksController@handle')->name('sendgrid');
                 $webhookRouter->post('mailjet', 'MailjetWebhooksController@handle')->name('mailjet');
-                $webhookRouter->post('postal', 'PostalWebhooksController@handle')->name('postal');
+                $webhookRouter->post('mailjet', 'MailjetWebhooksController@handle')->name('mailjet');
             });
 
             $this->get('v1/ping', '\Sendportal\Base\Http\Controllers\Api\PingController@index');
+            $this->post('v1/register', '\App\Http\Controllers\API\RegisterController@register');
+            $this->post('v1/updatePurchase', '\App\Http\Controllers\API\UpdatePurchaseController@updatePurchase');
         };
     }
 }

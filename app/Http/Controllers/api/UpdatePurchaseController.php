@@ -35,8 +35,6 @@ class UpdatePurchaseController extends Controller
      */
     public function updatePurchase(Request $request)
     {
-        // $abc = 111;
-        // return $abc;
         $data['purchase_id'] = $request->purchase_id;
         $data['mail_limit_day'] = $request->mail_limit_day;
         $data['mail_limit_month'] = $request->mail_limit_month;

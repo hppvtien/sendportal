@@ -58,6 +58,9 @@ class WebRoutes
                     $campaignRouter->get('sent', 'CampaignsController@sent')->name('sent');
                     $campaignRouter->get('{id}', 'CampaignsController@show')->name('show');
                     $campaignRouter->get('{id}/preview', 'CampaignsController@preview')->name('preview');
+                    $campaignRouter->get('{id}/getSubscriber', 'CampaignsController@getSubscriber')->name('getSubscriber');
+                    $campaignRouter->get('{id}/createListSub', 'CampaignsController@createListSub')->name('createListSub');
+                    $campaignRouter->get('{id}/editSubscriber', 'CampaignsController@editSubscriber')->name('editSubscriber');
                     $campaignRouter->put('{id}/send', 'CampaignDispatchController@send')->name('send');
                     $campaignRouter->get('{id}/status', 'CampaignsController@status')->name('status');
                     $campaignRouter->post('{id}/test', 'CampaignTestController@handle')->name('test');

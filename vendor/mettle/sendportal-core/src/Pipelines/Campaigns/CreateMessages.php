@@ -73,7 +73,7 @@ class CreateMessages
      */
     protected function handleTag(Campaign $campaign, Tag $tag): void
     {
-        \Log::info('- Handling Campaign Tag id=' . $tag->id);
+        \Log::info('- Handling Campaign Tag id='.$tag->id);
 
         $tag->subscribers()->whereNull('unsubscribed_at')->chunkById(1000, function ($subscribers) use ($campaign) {
             $this->dispatchToSubscriber($campaign, $subscribers);
@@ -91,7 +91,7 @@ class CreateMessages
         \Log::info('- Number of subscribers in this chunk: ' . count($subscribers));
 
         foreach ($subscribers as $subscriber) {
-            if (!$this->canSendToSubscriber($campaign->id, $subscriber->id)) {
+            if (! $this->canSendToSubscriber($campaign->id, $subscriber->id)) {
                 continue;
             }
 
@@ -162,11 +162,9 @@ class CreateMessages
         // it has already been dispatched. This makes the dispatch fault-tolerant
         // and prevent dispatching the same message to the same subscriber
         // more than once
-
-
         if ($message = $this->findMessage($campaign, $subscriber)) {
-
             \Log::info('Message has previously been created campaign=' . $campaign->id . ' subscriber=' . $subscriber->id);
+
             return $message;
         }
 

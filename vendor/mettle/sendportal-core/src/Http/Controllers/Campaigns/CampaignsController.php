@@ -184,6 +184,7 @@ class CampaignsController extends Controller
             Message::raw("MONTHNAME(created_at) as month_name")
         )
             ->whereYear('created_at', date('Y'))
+            ->where('workspace_id', Sendportal::currentWorkspaceId())
             ->groupBy('month_name')
             ->get()
             ->toArray();
@@ -216,7 +217,8 @@ class CampaignsController extends Controller
      */
     public function createListSub(Request $request)
     {
-        $workspace_id = $request->workspace_id;
+        
+        $workspace_id = (int)$request->workspace_id;
         $subscriibers_id = $request->subscriibers_id;
         $tagId = Tag::create([
             'name' => 'List-mail' . $workspace_id . '-' . Carbon::now(),

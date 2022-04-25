@@ -63,7 +63,7 @@
                 <i class="fa fa-tag color-gray-400 mr-1"></i> {{ __('Tags') }}
             </a>
             <a class="btn btn-primary btn-md btn-flat" href="{{ route('sendportal.subscribers.create') }}">
-                <i class="fa fa-plus mr-1"></i> {{ __('New Subscriber') }}
+                <i class="fa fa-plus mr-1"></i> {{ __('Thêm mới người nhận') }}
             </a>
         @endslot
     @endcomponent

@@ -48,6 +48,7 @@ class SubscribersController extends Controller
             request()->all()
         )->withQueryString();
         $tags = $this->tagRepo->pluck(Sendportal::currentWorkspaceId(), 'name', 'id');
+
         return view('sendportal::subscribers.index', compact('subscribers', 'tags'));
     }
 

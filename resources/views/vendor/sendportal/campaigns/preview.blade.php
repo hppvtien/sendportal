@@ -207,7 +207,6 @@
             target_check.removeClass('hide');
         }
     });
-
     var element = $('#input-field-scheduled_at');
     $('#id-field-schedule').change(function() {
         if (this.value == 'now') {
@@ -216,7 +215,6 @@
             element.removeClass('hide');
         }
     });
-
     $('#input-field-scheduled_at').flatpickr({
         enableTime: true,
         time_24hr: true,
@@ -233,7 +231,6 @@
                 workspace_id: workspace_id,
             },
             success: function(result) {
-
                 $('#subcribers-tag').html(result);
             },
             error: function(result) {
@@ -273,7 +270,6 @@
                 }
             });
         }
-
     });
     $(document).ready(function() {
         $('.list-send').click(function() {

@@ -49,6 +49,7 @@ class MessagesController extends Controller
     {
         $params = request()->only(['search', 'status']);
         $params['sent'] = true;
+
         $messages = $this->messageRepo->paginateWithSource(
             Sendportal::currentWorkspaceId(),
             'sent_atDesc',
@@ -56,6 +57,7 @@ class MessagesController extends Controller
             50,
             $params
         );
+
         return view('sendportal::messages.index', compact('messages'));
     }
 
@@ -73,7 +75,7 @@ class MessagesController extends Controller
             50,
             ['draft' => true]
         );
-        
+
         return view('sendportal::messages.index', compact('messages'));
     }
 
@@ -85,6 +87,7 @@ class MessagesController extends Controller
     public function show(int $messageId): View
     {
         $message = $this->messageRepo->find(Sendportal::currentWorkspaceId(), $messageId);
+
         $content = $this->mergeContentService->handle($message);
         $subject = $this->mergeSubjectService->handle($message);
 

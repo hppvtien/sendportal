@@ -39,7 +39,7 @@ class Tag extends BaseModel
 
     /** @var array */
     protected $fillable = [
-        'name',
+        'name','workspace_id',
     ];
 
     /** @var array */

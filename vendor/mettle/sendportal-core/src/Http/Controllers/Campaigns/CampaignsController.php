@@ -179,15 +179,24 @@ class CampaignsController extends Controller
         /* số email đã sử dụng trong ngày */
         $mail_used_on_day = Message::where('workspace_id', Sendportal::currentWorkspaceId())->whereBetween('sent_at', [\Carbon\Carbon::parse('00:00:00'), \Carbon\Carbon::parse('23:59:59')])->get()->count();
         /* số email đã sử dụng trong tháng */
-        $mail_used_on_month = Message::select(
-            Message::raw("(COUNT(*)) as count"),
-            Message::raw("MONTHNAME(created_at) as month_name")
-        )
-            ->whereYear('created_at', date('Y'))
-            ->where('workspace_id', Sendportal::currentWorkspaceId())
-            ->groupBy('month_name')
-            ->get()
-            ->toArray();
+        // $mail_used_on_day = Message::where('workspace_id', Sendportal::currentWorkspaceId())->whereBetween('sent_at', [\Carbon\Carbon::parse('00:00:00'), \Carbon\Carbon::parse('23:59:59')])->get()->count();
+
+            if($mail_used_on_day == 0){
+                $mail_used_on_month[0] = [
+                    'count' => 0,
+                    'month_name' => 'abc',
+                ];
+            } else {
+                $mail_used_on_month = Message::select(
+                    Message::raw("(COUNT(*)) as count"),
+                    Message::raw("MONTHNAME(created_at) as month_name")
+                )
+                    ->whereYear('created_at', date('Y'))
+                    ->where('workspace_id', Sendportal::currentWorkspaceId())
+                    ->groupBy('month_name')
+                    ->get()
+                    ->toArray();
+            }
         /* Tổng số mail đã được gửi đi trong tháng */
         $viewData = [
             'campaign' => $campaign,

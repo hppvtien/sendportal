@@ -83,9 +83,10 @@
                         <b>{{ __('NGƯỜI GỬI') }}</b>
                         <p class="text-primary pt-3"><b>Số mail đã gửi trong ngày:</b> <span class="text-success">{{
                                 $mail_used_on_day }}</span>/<span class="text-danger">{{ $mail_limit_day }}</span></p>
-                        <p class="text-primary"><b>Số mail đã gửi trong tháng:</b> <span class="text-success">{{
-                                $mail_used_on_month[0]['count'] }}</span>/ <span class="text-danger">{{
-                                $mail_limit_month }}</span></p>
+                        <p class="text-primary"><b>Số mail đã gửi trong tháng:</b> <span class="text-success">
+                            {{ $mail_used_on_month[0]['count'] }}
+                            </span>/ <span class="text-danger">
+                                {{ $mail_limit_month }}</span></p>
                     </div>
                     <div class="form-group row form-group-recipients">
                         <div class="col-sm-12">
